@@ -26,7 +26,7 @@ def s2c(r,theta,phi):
     z = r*np.cos(phi)
     return x,y,z
 
-# same wave recorded by 4 microphones array
+# same wave recorded by a 4 microphone array
 r     = 10
 theta = np.pi/4
 phi   = np.pi/3
@@ -42,3 +42,48 @@ m4 = sWave(x,y-.05,z,f)
 
 plt.figure()
 plt.plot(t,m1,t,m2,t,m3,t,m4)
+
+
+# Experiment 1: Separate two different sources
+
+# Wave 1
+r1     = 10
+theta1 = np.pi/4
+phi1   = np.pi/3
+
+x1,y1,z1 = s2c(r1,theta1,phi1)
+
+f1 = 0.01*fs
+
+# Wave 2
+r2     = 15
+theta2 = np.pi/3
+phi2   = np.pi/5
+
+x2,y2,z2 = s2c(r2,theta2,phi2)
+
+f2 = 0.02*fs
+
+# Microphone measurements
+m10  = sWave(x1+.05,y1,z1,f1) + sWave(x2+.05,y2,z2,f2) 
+m01  = sWave(x1,y1+.05,z1,f1) + sWave(x2,y2+.05,z2,f2)
+mn10 = sWave(x1-.05,y1,z1,f1) + sWave(x2-.05,y2,z2,f2)
+m0n1 = sWave(x1,y1-.05,z1,f1) + sWave(x2,y2-.05,z2,f2)
+
+plt.figure()
+plt.plot(t,m10,t,m01,t,mn10,t,m0n1)
+
+
+# Calculate xi
+x00 = (m10 + m01 + mn10 + m0n1)/4.
+x10 = (m10 - mn10)/2.
+x01 = (m01 - m0n1)/2.
+
+
+
+
+
+
+
+
+
