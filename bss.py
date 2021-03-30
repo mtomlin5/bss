@@ -76,14 +76,45 @@ plt.plot(t,m10,t,m01,t,mn10,t,m0n1)
 
 # Calculate xi
 x00 = (m10 + m01 + mn10 + m0n1)/4.
-x10 = (m10 - mn10)/2.
-x01 = (m01 - m0n1)/2.
+x10 = 100*(m10 - mn10)/2. # 100 to convert from cm^-1 to m^-1
+x01 = 100*(m01 - m0n1)/2.
+
+plt.figure()
+plt.plot(t,x10,t,x01)
+
+# Perform ICA
+from sklearn.decomposition import FastICA
+
+X = np.zeros((N,2)) # 2 measurements, N samples
+X[:,0] = x10
+X[:,1] = x01
+
+ica = FastICA(n_components=2, random_state=0)
+S = ica.fit_transform(X)  # Reconstruct signals
+A = ica.mixing_  # Get estimated mixing matrix
+
+# Sources will be time derivatives of the waves so we integrate
+from scipy import integrate
+s1p = integrate.cumtrapz(S[:,0], t)
+s1p = s1p/np.max(s1p)
+
+s2p = integrate.cumtrapz(S[:,1], t)
+s2p = s2p/np.max(s2p)
+
+plt.figure()
+plt.plot(t[0:N-1],s1p,t[0:N-1],s2p)
+
+# Visualize sources
+s1gt = sWave(x1,y1,z1,f1)
+s1gt = s1gt/np.max(s1gt)
+
+s2gt = sWave(x2,y2,z2,f2)
+s2gt = s2gt/np.max(s2gt)
+
+plt.figure()
+plt.plot(t,s1gt,t,s2gt)
 
 
-
-
-
-
-
-
+# From A matrix convert tau to r1 and r2
+R = A/cs
 
