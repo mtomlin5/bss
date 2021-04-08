@@ -7,26 +7,30 @@ float f(float x){
 }
 
 float g(float x){
-	return tanh((double) x);
+	return atan((double) x);
 }
 
-void print_max(float x[][], int N){
+//Update to use pointers instead of hardcoding 3?
+void print_mat(float x[][3], int N){
 	int i,j;
-	for (int i = 0; i < N; ++i)
+	for (i = 0; i < N; ++i)
 	{
-		for (int c = 0; c < N; ++c)
+		for (j = 0; j < 3; ++j)
 		{
-			/* code */
+			printf("%f ", x[i][j]);
 		}
+		printf("\n");
 	}
+	printf("\n");
 }
 
 int main() {
    float mu = 5e-6;
 
+   //mC = I-C
    float mC[3][3] = {
-    {  0, -0.1, -0.1},
-    {-0.1,   0, -0.1},
+    {  1, -0.1, -0.1},
+    {-0.1,   1, -0.1},
     {-0.1, -0.1, 1  }
    };
 
@@ -35,8 +39,12 @@ int main() {
 
    int i,c,j;
 
-   for (i = 0; i < 2; ++i)
+   for (i = 0; i < N; ++i)
    {
+   		printf("iter %d\n", i);
+   		print_mat(mC, 3);
+
+
    		e[0] = de00[i];
    		e[1] = e10[i];
    		e[2] = e01[i];
