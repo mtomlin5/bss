@@ -1,0 +1,21 @@
+Want to make a bss function that takes in 3 arrays that we can call
+void bss(de00[], e10[], e01[], N) 
+
+we have all of those variables declared in data.h
+
+make bss.c a function that we can include
+
+make bss_test.c (same code as current bss.c, just calls bss fucntion, includes stdio.h and whatever else
+used for printing / debugging the algorithm)
+bss_test.c is for testing on computer
+
+make arduino file with loop and setup functions
+
+the loop function should probably just wait until an input 'start' is detected (so we can use a trigger to start counting and wait until it says done or w/e)
+
+no idea whats in setup
+
+goals for bss function
+	get rid of math lib
+		make atan a look up table
+		
