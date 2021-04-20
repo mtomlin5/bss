@@ -1,8 +1,8 @@
 //#include "/home/mike/Documents/projects/repos/bss/Mike/C_v2/bss.h"
 //#include "/home/mike/Documents/projects/repos/bss/Mike/C_v2/data.h"
 
-#include "/home/mike/Documents/projects/repos/bss/Mike/Arduino/bss_arduino_v2/data.hh"
-#include "/home/mike/Documents/projects/repos/bss/Mike/Arduino/bss_arduino_v2/bss.hh"
+#include "data.hh"
+#include "bss.hh"
 
 void setup() {
   // put your setup code here, to run once:
@@ -15,7 +15,8 @@ void print_mat(float x[][3], int N){
   {
     for (j = 0; j < 3; ++j)
     {
-      Serial.printf("%f ", x[i][j]);
+      Serial.print(x[i][j]);
+      Serial.print(" ");
     }
     Serial.println();
   }

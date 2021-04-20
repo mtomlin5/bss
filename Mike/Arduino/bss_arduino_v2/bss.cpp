@@ -9,8 +9,8 @@ float f(float x){
 }
 
 float atan_lookup(float x){
-   int i;
-   int isNegative;
+   int i = 0;
+   int isNegative = 0;
    if (x < 0){
       isNegative = 1;
       x = x * -1;
